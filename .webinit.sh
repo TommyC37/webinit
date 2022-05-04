@@ -9,7 +9,9 @@ DESC=$3
 
 echo "Creating directory and files..."
 
-mkdir $PARENT ./$PARENT/src ./$PARENT/src/images
+mkdir $PARENT ./$PARENT/public ./$PARENT/public/images
+
+cd $PARENT
 
 echo "body {
 background-color: darkslateblue;
@@ -24,23 +26,21 @@ echo "<!DOCTYPE html>
     <title>$TITLE</title>
     <meta name=\"description\" content=\"$DESC\">
     <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">
-    <link rel=\"stylesheet\" href=\"src/style.css\">
+    <link rel=\"stylesheet\" type=\"text/css\" href=\"/style.css\">
   </head>
   <body>
     <h1>Hola, mundo!</h1>
     <script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js\"></script> 
     <script src=\"app.js\" async defer></script>
   </body>
-</html>" > ./$PARENT/index.html
+</html>" > ./index.html
 
-cd $PARENT
-
-echo "
-const express = require('express');
+echo "const express = require('express');
 const app = express();
 
 const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(express.static(__dirname + '/public'));
 
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/index.html');
@@ -48,8 +48,7 @@ app.get('/', (req, res) => {
 
 app.listen(3000, () => {
   console.log('Server started on port 3000.');
-});
-" > ./$PARENT/app.js
+});" > ./app.js
 
 echo "Setting up npm dependencies..."
 
@@ -63,10 +62,11 @@ git init
 echo "#Ignore all SQLite databases
 db/*.sqlite3" > .gitignore
 
-echo "Starting node server and launching app..."
-
-nodemon app.js
-
-code ../$PARENT
+echo "Opening files in VS Code..."
+code .
 code index.html
-xdg-open index.html
+
+sleep 2 && xdg-open http://localhost:3000 &
+
+echo "Starting node server and launching app..."
+nodemon app.js
