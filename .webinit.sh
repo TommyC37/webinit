@@ -16,7 +16,7 @@ cd $PARENT
 echo "body {
 background-color: darkslateblue;
 color: ghostwhite;
-}" > ./$PARENT/src/style.css
+}" > ./public/style.css
 
 echo "<!DOCTYPE html>
 <html>
