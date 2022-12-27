@@ -1,6 +1,6 @@
 # webinit
 
-Written for Ubuntu, this script creates the base files for a Node.js web app. Sepecifically, it:
+Written for Ubuntu, this script creates the base files for a Node.js web app. Specifically, it:
 
 1. Creates directories with boilerplate index.html, app.js, and css files.
 2. Initiates npm.
