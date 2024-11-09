@@ -3,9 +3,9 @@
 # This script builds a boilerplate set of files for a Node.js web app, opens the relevant files in VS Code,
 # launches the node server, and opens the web app in the browser.
 
-PARENT=$1
-TITLE=$2
-DESC=$3
+PARENT=${1:-"WEBINIT_DIR"}
+TITLE=${2:-"WEBINIT_TITLE"}
+DESC=${3:-"WEBINIT_DESC"}
 
 echo "Creating directory and files..."
 
